@@ -118,6 +118,12 @@ body {
   }
 }
 
+@media only screen and (max-width: 550px) {
+  .container {
+    min-width: 36rem;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .container {
     min-width: 32rem;
