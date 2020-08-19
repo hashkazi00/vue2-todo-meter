@@ -117,4 +117,10 @@ body {
     font-size: 52.5%;
   }
 }
+
+@media only screen and (max-width: 450px) {
+  .container {
+    min-width: 32rem;
+  }
+}
 </style>
