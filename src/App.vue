@@ -120,7 +120,7 @@ body {
 
 @media only screen and (max-width: 450px) {
   .container {
-    min-width: 36rem;
+    min-width: 40rem;
   }
 }
 @media only screen and (max-width: 350px) {
