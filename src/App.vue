@@ -40,8 +40,14 @@ export default {
     return {
       latestAdded: [],
       doLater: [],
-      completed: []
+      completed: [],
+      STORAGE_KEY: "meteor-todo-key"
     };
+  },
+  created() {
+    this.latestAdded = JSON.parse(
+      localStorage.getItem(this.STORAGE_KEY) || "[]"
+    );
   },
   methods: {
     addTodoItem(value) {
@@ -50,6 +56,8 @@ export default {
         title: value,
         status: "pending"
       });
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.latestAdded));
+      this.keepListShort();
     },
     laterTodo(index) {
       this.doLater.push(this.latestAdded[index]);
@@ -71,6 +79,22 @@ export default {
     },
     deleteTodoFinal(index) {
       this.$delete(this.completed, index);
+    },
+    keepListShort() {
+      for (var key in window.localStorage) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (window.localStorage.hasOwnProperty(key)) {
+          this.data += window.localStorage[key];
+          if (
+            ((window.localStorage[key].length * 16) / (8 * 1024)).toFixed(2) >=
+            5
+          ) {
+            alert(
+              "You have exceeded the localStorage, please delete a few completed items or reset to use the app again"
+            );
+          }
+        }
+      }
     }
   }
 };
