@@ -41,12 +41,18 @@ export default {
       latestAdded: [],
       doLater: [],
       completed: [],
-      STORAGE_KEY: "meteor-todo-key"
+      STORAGE_KEY1: "latestAdded",
+      STORAGE_KEY2: "doLater",
+      STORAGE_KEY3: "completed"
     };
   },
   created() {
     this.latestAdded = JSON.parse(
-      localStorage.getItem(this.STORAGE_KEY) || "[]"
+      localStorage.getItem(this.STORAGE_KEY1) || "[]"
+    );
+    this.doLater = JSON.parse(localStorage.getItem(this.STORAGE_KEY2) || "[]");
+    this.completed = JSON.parse(
+      localStorage.getItem(this.STORAGE_KEY3) || "[]"
     );
   },
   methods: {
@@ -56,29 +62,38 @@ export default {
         title: value,
         status: "pending"
       });
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.latestAdded));
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
       this.keepListShort();
     },
     laterTodo(index) {
       this.doLater.push(this.latestAdded[index]);
+      localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
       this.$delete(this.latestAdded, index);
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
     },
     done(index) {
       this.completed.push(this.latestAdded[index]);
+      localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
       this.$delete(this.latestAdded, index);
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
     },
     doneLater(index) {
       this.completed.push(this.doLater[index]);
+      localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
       this.$delete(this.doLater, index);
+      localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
     },
     deleteTodoItem(index) {
       this.$delete(this.latestAdded, index);
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.completed));
     },
     deleteTodoLater(index) {
       this.$delete(this.doLater, index);
+      localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
     },
     deleteTodoFinal(index) {
       this.$delete(this.completed, index);
+      localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
     },
     keepListShort() {
       for (var key in window.localStorage) {
