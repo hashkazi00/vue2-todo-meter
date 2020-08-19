@@ -118,13 +118,12 @@ body {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 450px) {
   .container {
     min-width: 36rem;
   }
 }
-
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 350px) {
   .container {
     min-width: 32rem;
   }
