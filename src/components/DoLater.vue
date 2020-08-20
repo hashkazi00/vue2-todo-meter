@@ -64,6 +64,14 @@
               </g>
             </svg>
             <svg
+              @click="resume(index)"
+              class="resume"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 22v-20l18 10-18 10z" />
+            </svg>
+            <svg
               @click="done(index)"
               class="done"
               version="1.1"
@@ -98,6 +106,9 @@ export default {
   methods: {
     deleteTodo(index) {
       this.$emit("deleteTodoLater", index);
+    },
+    resume(index) {
+      this.$emit("resumeLater", index);
     },
     done(index) {
       this.$emit("doneLater", index);
@@ -170,6 +181,9 @@ export default {
 
 .done {
   fill: #2fde49;
+}
+.resume {
+  fill: #ffc935;
 }
 
 .container__subHeading {

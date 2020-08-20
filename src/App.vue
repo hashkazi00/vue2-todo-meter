@@ -10,7 +10,12 @@
         @later="laterTodo"
         @done="done"
       />
-      <DoLater :doLater="doLater" @deleteTodoLater="deleteTodoLater" @doneLater="doneLater" />
+      <DoLater
+        :doLater="doLater"
+        @deleteTodoLater="deleteTodoLater"
+        @doneLater="doneLater"
+        @resumeLater="resumeLater"
+      />
       <Completed :completed="completed" @deleteTodoFinal="deleteTodoFinal" />
     </div>
   </div>
@@ -80,6 +85,12 @@ export default {
     doneLater(index) {
       this.completed.push(this.doLater[index]);
       localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
+      this.$delete(this.doLater, index);
+      localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
+    },
+    resumeLater(index) {
+      this.latestAdded.push(this.doLater[index]);
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
       this.$delete(this.doLater, index);
       localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
     },
