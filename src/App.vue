@@ -96,7 +96,7 @@ export default {
     },
     deleteTodoItem(index) {
       this.$delete(this.latestAdded, index);
-      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.completed));
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
     },
     deleteTodoLater(index) {
       this.$delete(this.doLater, index);
