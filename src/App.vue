@@ -16,7 +16,7 @@
         @doneLater="doneLater"
         @resumeLater="resumeLater"
       />
-      <Completed :completed="completed" @deleteTodoFinal="deleteTodoFinal" />
+      <Completed :completed="completed" @deleteTodoFinal="deleteTodoFinal" @redoFinal="redoFinal" />
     </div>
   </div>
 </template>
@@ -103,6 +103,12 @@ export default {
       localStorage.setItem(this.STORAGE_KEY2, JSON.stringify(this.doLater));
     },
     deleteTodoFinal(index) {
+      this.$delete(this.completed, index);
+      localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
+    },
+    redoFinal(index) {
+      this.latestAdded.push(this.doLater[index]);
+      localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
       this.$delete(this.completed, index);
       localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
     },
