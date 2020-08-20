@@ -107,7 +107,7 @@ export default {
       localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
     },
     redoFinal(index) {
-      this.latestAdded.push(this.doLater[index]);
+      this.latestAdded.push(this.completed[index]);
       localStorage.setItem(this.STORAGE_KEY1, JSON.stringify(this.latestAdded));
       this.$delete(this.completed, index);
       localStorage.setItem(this.STORAGE_KEY3, JSON.stringify(this.completed));
